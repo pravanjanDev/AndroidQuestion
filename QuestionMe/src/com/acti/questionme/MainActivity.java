@@ -2,6 +2,9 @@ package com.acti.questionme;
 
 import java.io.IOException;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.acti.questionme.R;
 
 import android.os.AsyncTask;
@@ -44,27 +47,26 @@ public class MainActivity extends Activity {
 		email		=(EditText)findViewById(R.id.email);
 		firstname	=(EditText)findViewById(R.id.firstname);
 		lastname	=(EditText)findViewById(R.id.lastname);
-		
-		button.setOnClickListener(new OnClickListener() {
 			
-			@Override
-			public void onClick(View v) {
+			
+			button.setOnClickListener(new OnClickListener() {
 				
-//				Toast.makeText(MainActivity.this, "Hi "+firstname.getText()+" "+lastname.getText()+"\n"+email.getText(), Toast.LENGTH_LONG).show();
-				
-				
-//				Intent intent=new Intent(context, UserPageActivity.class);
-//				intent.putExtra(EMAIL     ,  email.getText().toString());
-//				intent.putExtra(FIRSTNAME ,  firstname.getText().toString());
-//				intent.putExtra(LASTNAME  ,	 lastname.getText().toString());
-//				startActivity(intent);
-				new RegisterTask().execute();
-			}
-		});
-		
-		
-		
-		
+				@Override
+				public void onClick(View v) {
+					if(!"".equals(email.getText().toString()) && 
+							!"".equals(firstname.getText().toString()) &&!"".equals(firstname.getText().toString())){
+						new RegisterTask().execute();
+						
+					}else{
+						Toast.makeText(MainActivity.this,"All fields are mandatory!", Toast.LENGTH_LONG).show();
+					}
+					
+					
+				}
+			});
+			
+			
+	
 		
 	}
 	
@@ -74,23 +76,34 @@ public class MainActivity extends Activity {
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			
-			
+			boolean Status=false;
 			try {
 				if(!"".equals(email.getText().toString().trim()))
 				{
-					String lUrl = "http://localhost:8888/RegisterNewUser";
-					String lParams = "email="+email+"&firstname="+firstname+"&lastname="+lastname;
-					String lHttpResponse = CustomHttpClient.executeHttpPost(lUrl, lParams, CustomHttpClient.HTTP_CONTENTTYPE_JSON);
+					
+					Log.i(getClass().getName(),"Email IN Async-"+email.getText());
+					String lUrl = "http://staging-adaptive-questionme.appspot.com/QuestionController/RegisterNewUser";
+					String lParams = "email="+email.getText().toString().trim()+"&firstName="+firstname.getText().toString().trim()+"&lastName="+lastname.getText().toString().trim();
+					String lHttpResponse = CustomHttpClient.executeHttpPost(lUrl, lParams, CustomHttpClient.HTTP_CONTENTTYPE_URLENCODED);
+					Log.i(getClass().getName(), "lParams - "+lParams );
 					Log.i(getClass().getName(), "lHttpResponse - "+lHttpResponse );
+					
+					try {
+						JSONObject json=new JSONObject(lHttpResponse);
+						Status=Boolean.parseBoolean((String) json.get("success"));
+						Log.i(getClass().getName(), "Status -"+Status);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			return Status;
 			
-			return null;
 		}
 		
 		
@@ -108,11 +121,11 @@ public class MainActivity extends Activity {
 			lPd.dismiss();
 			if(result)
 			{
-				Toast.makeText(MainActivity.this, "Logged in successfully", Toast.LENGTH_LONG);
+				Toast.makeText(MainActivity.this, "Logged in successfully", Toast.LENGTH_LONG).show();
 			}
 			else
 			{
-				Toast.makeText(MainActivity.this, "Unable to login", Toast.LENGTH_LONG);
+				Toast.makeText(MainActivity.this, "Unable to login", Toast.LENGTH_LONG).show();
 			}
 		}
 		

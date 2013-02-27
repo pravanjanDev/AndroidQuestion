@@ -8,6 +8,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import android.util.Log;
+
 public class CustomHttpClient {
 	
 	public static String HTTP_CONTENTTYPE_URLENCODED			= "application/x-www-form-urlencoded";
@@ -31,7 +33,8 @@ public class CustomHttpClient {
 				conn.setRequestProperty("Content-Type", "application/json");
 			}
 			OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-			wr.write(postParameters.toString().trim());
+			Log.i("Tag Here","In CustomHttpClient -"+url +":Params"+postParameters);
+			wr.write(postParameters);
 			wr.flush();
 			inputStream = conn.getInputStream();
 			wr.close();
