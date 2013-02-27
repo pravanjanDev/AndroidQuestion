@@ -1,0 +1,65 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="50dp"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/emailText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/emailText"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+     <EditText
+         android:id="@+id/email"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:ems="10"
+         android:inputType="textEmailAddress" >
+
+         <requestFocus />
+     </EditText>
+
+     <TextView
+         android:id="@+id/firstnameText"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="@string/firstname"
+         android:layout_marginTop="10dp"
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+     
+
+     <EditText
+         android:id="@+id/firstname"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:ems="10"
+         android:inputType="textPersonName" />
+
+     <TextView
+         android:id="@+id/lastnameText"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="@string/lastname"
+         android:layout_marginTop="10dp"
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+     <EditText
+         android:id="@+id/lastname"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:ems="10"
+         android:inputType="textPersonName" />
+
+     <Button
+         android:id="@+id/submit"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_gravity="center"
+         android:layout_marginTop="30dp"
+         android:text="@string/submit" />
+
+</LinearLayout>
