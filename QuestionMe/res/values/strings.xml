@@ -10,5 +10,9 @@
     <string name="lastname">LastName</string>
     <string name="submit">SUBMIT</string>
     <string name="title_activity_user_page">UserPageActivity</string>
+    <string name="ask">AskQ</string>
+    <string name="title_activity_my_questions">MyQuestionsActivity</string>
+    <string name="title_activity_ask_question">AskQuestionActivity</string>
+    <string name="title_activity_all_questions">AllQuestionsActivity</string>
 
 </resources>

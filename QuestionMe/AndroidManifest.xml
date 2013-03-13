@@ -7,7 +7,8 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
-    <uses-permission android:name="android.permission.INTERNET" /> 
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -26,6 +27,18 @@
         <activity
             android:name="com.acti.questionme.UserPageActivity"
             android:label="@string/title_activity_user_page" >
+        </activity>
+        <activity
+            android:name="com.acti.questionme.MyQuestionsActivity"
+            android:label="@string/title_activity_my_questions" >
+        </activity>
+        <activity
+            android:name="com.acti.questionme.AskQuestionActivity"
+            android:label="@string/title_activity_ask_question" >
+        </activity>
+        <activity
+            android:name="com.acti.questionme.AllQuestionsActivity"
+            android:label="@string/title_activity_all_questions" >
         </activity>
     </application>
 

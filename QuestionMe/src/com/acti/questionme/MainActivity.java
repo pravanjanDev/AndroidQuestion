@@ -31,6 +31,7 @@ public class MainActivity extends Activity {
 
 	private Button button;
 	private EditText email,firstname,lastname;
+	private Context context;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class MainActivity extends Activity {
 
 	private void addListenOnSubmit() {
 		
+		context		=this;
 		button		=(Button)findViewById(R.id.submit);
 		email		=(EditText)findViewById(R.id.email);
 		firstname	=(EditText)findViewById(R.id.firstname);
@@ -65,9 +67,6 @@ public class MainActivity extends Activity {
 				}
 			});
 			
-			
-	
-		
 	}
 	
 	private class RegisterTask extends AsyncTask<Void, Void, Boolean>{
@@ -121,6 +120,11 @@ public class MainActivity extends Activity {
 			lPd.dismiss();
 			if(result)
 			{
+				Intent intent = new Intent(context, UserPageActivity.class);
+//		    	EditText editText = (EditText) findViewById(R.id.edit_message);
+//		    	String message = editText.getText().toString();
+//		    	intent.putExtra(EXTRA_MESSAGE, message);
+		    	startActivity(intent);
 				Toast.makeText(MainActivity.this, "Logged in successfully", Toast.LENGTH_LONG).show();
 			}
 			else
